@@ -26,9 +26,9 @@ def load_unique():
         for file in os.listdir(train_directory + '/' + folder): #For the file(s) located in this directory
             filepath = train_directory + '/' + folder + '/' + file #Filepath
             image = cv2.imread(filepath) #Read the images in the filepath
-            final_img = cv2.resize(image, image_size) #Resize the images in the filepath
-            final_img = cv2.cvtColor(final_img, cv2.COLOR_BGR2RGB) #Convert the images to this color scale
-            images_for_plot.append(final_img) #Passing through the images
+            final_image = cv2.resize(image, image_size) #Resize the images in the filepath
+            final_image = cv2.cvtColor(final_image, cv2.COLOR_BGR2RGB) #Convert the images to this color scale
+            images_for_plot.append(final_image) #Passing through the images
             labels_for_plot.append(folder) #Passing through the folders
             break
     return images_for_plot, labels_for_plot 
@@ -163,27 +163,4 @@ def fit_model():
     return history
 model = build_model()
 model_history = fit_model()
-        
-
-                     
-
-
-
-            
-               
-
-    
-
-
-
-        
-
-                     
-
-
-
-            
-               
-
-    
 
