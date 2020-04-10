@@ -14,19 +14,19 @@ from keras import regularizers
 print(os.listdir('C:/Users/smeni/OneDrive/Desktop/Spring_2020_Classes/Capstone_Part_1/asl-alphabet'))
 
 #Making note of the training and testing directories
-train_dir = 'C:/Users/smeni/OneDrive/Desktop/Spring_2020_Classes/Capstone_Part_1/asl-alphabet/asl_alphabet_train/asl_alphabet_train'
-test_dir = 'C:/Users/smeni/OneDrive/Desktop/Spring_2020_Classes/Capstone_Part_1/asl-alphabet/asl_alphabet_test/alphabet_test'
+train_directory = 'C:/Users/smeni/OneDrive/Desktop/Spring_2020_Classes/Capstone_Part_1/asl-alphabet/asl_alphabet_train/asl_alphabet_train'
+test_directory = 'C:/Users/smeni/OneDrive/Desktop/Spring_2020_Classes/Capstone_Part_1/asl-alphabet/asl_alphabet_test/alphabet_test'
 
 #Prints Unique Labels
 def load_unique():
-    size_img = 64,64 #Dimensionality
+    image_size = 64,64 #Dimensionality
     images_for_plot = [] #All the images 
     labels_for_plot = [] #Labels of the alphabet
-    for folder in os.listdir(train_dir): #For the folder located in the training directory
-        for file in os.listdir(train_dir + '/' + folder): #For the file(s) located in this directory
-            filepath = train_dir + '/' + folder + '/' + file #Filepath
+    for folder in os.listdir(train_directory): #For the folder located in the training directory
+        for file in os.listdir(train_directory + '/' + folder): #For the file(s) located in this directory
+            filepath = train_directory + '/' + folder + '/' + file #Filepath
             image = cv2.imread(filepath) #Read the images in the filepath
-            final_img = cv2.resize(image, size_img) #Resize the images in the filepath
+            final_img = cv2.resize(image, image_size) #Resize the images in the filepath
             final_img = cv2.cvtColor(final_img, cv2.COLOR_BGR2RGB) #Convert the images to this color scale
             images_for_plot.append(final_img) #Passing through the images
             labels_for_plot.append(folder) #Passing through the folders
@@ -42,11 +42,11 @@ def load_data():
     images = [] #Images to load
     labels = [] #Labels to load
     size = 64,64 #Dimensoinality
-    print("LOADING DATA FROM : ", end = '') #Loading data from each of the alphabet/select commands folders
-    for folder in os.listdir(train_dir): #For the folder located in the training directory
+    print("Loading data : ", end = '') #Loading data from each of the alphabet/select commands folders
+    for folder in os.listdir(train_directory): #For the folder located in the training directory
         print(folder, end = ' | ') #Print all the folders in that directory
-        for image in os.listdir(train_dir + "/" + folder): #For the images that are within the specified path
-            temp_img = cv2.imread(train_dir + '/' + folder + '/' + image)#Read the images that are within the individual folders
+        for image in os.listdir(train_directory + "/" + folder): #For the images that are within the specified path
+            temp_img = cv2.imread(train_directory + '/' + folder + '/' + image)#Read the images that are within the individual folders
             temp_img = cv2.resize(temp_img,size)#Resize the images
             images.append(temp_img)#Pass ther images through
             #Pass through all these images
@@ -145,6 +145,7 @@ def build_model():
 
     model.add(Flatten())
     model.add(Dropout(0.5))
+    
     #Dense Layers
     model.add(Dense(512, activation = 'relu'))
     model.add(Dense(29, activation = 'softmax'))
@@ -152,7 +153,7 @@ def build_model():
     #Compile the model
     model.compile(optimizer = 'adam', loss = keras.losses.categorical_crossentropy, metrics = ['accuracy'])
 
-    print("MODEL CREATED")
+    print("Mdel Created")
     model.summary()
     return model
 
@@ -162,6 +163,19 @@ def fit_model():
     return history
 model = build_model()
 model_history = fit_model()
+        
+
+                     
+
+
+
+            
+               
+
+    
+
+
+
         
 
                      
